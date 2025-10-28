@@ -4,3 +4,8 @@ crytic-export/
 node_modules/
 typechain/
 foundry-out/
+
+# Environment variables
+.env
+.env.local
+.env.*.local

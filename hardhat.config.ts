@@ -3,6 +3,11 @@ import '@nomiclabs/hardhat-etherscan'
 import '@nomiclabs/hardhat-waffle'
 import 'hardhat-typechain'
 import 'hardhat-watcher'
+import * as dotenv from 'dotenv'
+
+dotenv.config()
+
+const PRIVATE_KEY = process.env.PRIVATE_KEY as string
 
 const LOW_OPTIMIZER_COMPILER_SETTINGS = {
   version: '0.8.15',
@@ -76,11 +81,41 @@ export default {
     optimism: {
       url: `https://optimism-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
     },
+    megaTestnet: {
+      url: 'https://carrot.megaeth.com/rpc',
+      chainId: 6342,
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+    },
+    'mega-testnet': {
+      url: 'https://carrot.megaeth.com/rpc',
+      chainId: 6342,
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+    },
   },
   etherscan: {
-    // Your API key for Etherscan
-    // Obtain one at https://etherscan.io/
-    apiKey: process.env.ETHERSCAN_API_KEY,
+    apiKey: {
+      mainnet: process.env.ETHERSCAN_API_KEY || '',
+      megaTestnet: 'empty',
+      'mega-testnet': 'empty',
+    },
+    customChains: [
+      {
+        network: 'mega-testnet',
+        chainId: 6342,
+        urls: {
+          apiURL: 'https://megaeth-testnet.blockscout.com/api',
+          browserURL: 'https://megaeth-testnet.blockscout.com',
+        },
+      },
+      {
+        network: 'megaTestnet',
+        chainId: 6342,
+        urls: {
+          apiURL: 'https://megaeth-testnet.blockscout.com/api',
+          browserURL: 'https://megaeth-testnet.blockscout.com',
+        },
+      },
+    ],
   },
   solidity: {
     compilers: [DEFAULT_COMPILER_SETTINGS],
