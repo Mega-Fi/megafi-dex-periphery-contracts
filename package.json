@@ -32,12 +32,13 @@
     "@openzeppelin/contracts": "4.6.0",
     "@uniswap/v2-core": "1.0.1",
     "@uniswap/v3-core": "1.0.2-solc-0.8-simulate",
+    "axios": "^1.13.1",
     "base64-sol": "1.1.0",
     "hardhat-watcher": "^2.1.1"
   },
   "devDependencies": {
     "@nomiclabs/hardhat-ethers": "^2.0.2",
-    "@nomiclabs/hardhat-etherscan": "^2.1.8",
+    "@nomiclabs/hardhat-etherscan": "^3.1.8",
     "@nomiclabs/hardhat-waffle": "^2.0.1",
     "@typechain/ethers-v5": "^4.0.0",
     "@types/chai": "^4.2.6",
@@ -48,7 +49,7 @@
     "dotenv": "^17.2.3",
     "ethereum-waffle": "^3.0.2",
     "ethers": "^5.0.8",
-    "hardhat": "^2.9.6",
+    "hardhat": "^2.19.0",
     "hardhat-typechain": "^0.3.5",
     "is-svg": "^4.3.1",
     "mocha": "^6.2.2",
@@ -64,6 +65,7 @@
   },
   "scripts": {
     "compile": "hardhat compile",
-    "test": "hardhat test"
+    "test": "hardhat test",
+    "deploy:periphery": "hardhat run scripts/deploy-periphery.ts --network megaeth_testnet"
   }
 }

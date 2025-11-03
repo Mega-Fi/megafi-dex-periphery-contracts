@@ -3,8 +3,8 @@ import * as fs from 'fs'
 import * as path from 'path'
 
 // Import deployed addresses from core
-const FACTORY_ADDRESS = '0xCd983757ed94053986e6Ae82dC88f1301d05d86A'
-const WETH9_ADDRESS = '0xd57083cF8A0d9ebBaBc295CC91AaF1E36D244096' // Using MWETH as WETH9
+const FACTORY_ADDRESS = '0xE9827E49a90d5c03307c579730DBFD66934436A3' // NEW v0.8.12 Factory
+const WETH9_ADDRESS = '0x07A66D3706b30D2eCA1170FbeE0E36F6Cb2aa407' // Proper WETH9 contract with deposit/withdraw
 
 interface PeripheryDeployment {
   swapRouter: string
@@ -146,7 +146,7 @@ async function main() {
   console.log('NFTDescriptor Library:     ', nftDescriptorLibrary.address)
   console.log('─'.repeat(70))
   console.log('Factory (from core):       ', FACTORY_ADDRESS)
-  console.log('WETH9 (MWETH):            ', WETH9_ADDRESS)
+  console.log('WETH9:                     ', WETH9_ADDRESS)
   console.log('─'.repeat(70))
 
   console.log('\n📚 Next Steps:')

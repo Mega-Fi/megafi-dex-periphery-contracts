@@ -1,0 +1,12 @@
+{
+  "swapRouter": "0x44b31AeEd2df6CECDE39EC28Fa72DfAF6972ADd6",
+  "nonfungiblePositionManager": "0x583D2A377ee1E8D92da43342af1f801bC1Cc30CA",
+  "nonfungibleTokenPositionDescriptor": "0xF838E6D0480EbC9cb04906E1F639d85a934D9Ba8",
+  "nftDescriptorLibrary": "0x1C4c25112e2c239A410AB185B76C846108d4c50f",
+  "factory": "0xE9827E49a90d5c03307c579730DBFD66934436A3",
+  "weth9": "0x07A66D3706b30D2eCA1170FbeE0E36F6Cb2aa407",
+  "deployer": "0x27038094d4bf5188bA5795466d840C8f9c3ACB9d",
+  "network": "MegaETH Testnet",
+  "chainId": 6342,
+  "timestamp": "2025-10-31T10:37:36.705Z"
+}
