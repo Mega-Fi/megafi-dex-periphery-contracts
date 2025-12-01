@@ -12,9 +12,10 @@ const PRIVATE_KEY = process.env.PRIVATE_KEY as string
 const LOW_OPTIMIZER_COMPILER_SETTINGS = {
   version: '0.8.15',
   settings: {
+    evmVersion: 'istanbul',
     optimizer: {
       enabled: true,
-      runs: 2_000,
+      runs: 1001,
     },
     metadata: {
       bytecodeHash: 'none',
@@ -25,10 +26,11 @@ const LOW_OPTIMIZER_COMPILER_SETTINGS = {
 const LOWEST_OPTIMIZER_COMPILER_SETTINGS = {
   version: '0.8.15',
   settings: {
+    evmVersion: 'istanbul',
     viaIR: true,
     optimizer: {
       enabled: true,
-      runs: 1_000,
+      runs: 999,
     },
     metadata: {
       bytecodeHash: 'none',
@@ -39,9 +41,10 @@ const LOWEST_OPTIMIZER_COMPILER_SETTINGS = {
 const DEFAULT_COMPILER_SETTINGS = {
   version: '0.8.15',
   settings: {
+    evmVersion: 'istanbul',
     optimizer: {
       enabled: true,
-      runs: 1_000_000,
+      runs: 999999,
     },
     metadata: {
       bytecodeHash: 'none',
@@ -82,8 +85,11 @@ export default {
       url: `https://optimism-mainnet.infura.io/v3/${process.env.INFURA_API_KEY}`,
     },
     'mega-testnet': {
-      url: 'https://carrot.megaeth.com/rpc',
-      chainId: 6342,
+      url: 'https://timothy.megaeth.com/rpc',
+      chainId: 6343,
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+      gasPrice: 2000000,
+      gasLimit: 900000000, // 1 gwei
     },
 
     // megaTestnet: {
@@ -110,26 +116,26 @@ export default {
     customChains: [
       {
         network: 'mega-testnet',
-        chainId: 6342,
+        chainId: 6343,
         urls: {
-          apiURL: 'https://megaeth-testnet.blockscout.com/api',
-          browserURL: 'https://megaeth-testnet.blockscout.com',
+          apiURL: 'https://megaeth-testnet-v2.blockscout.com/api',
+          browserURL: 'https://megaeth-testnet-v2.blockscout.com',
         },
       },
       {
         network: 'megaTestnet',
-        chainId: 6342,
+        chainId: 6343,
         urls: {
-          apiURL: 'https://megaeth-testnet.blockscout.com/api',
-          browserURL: 'https://megaeth-testnet.blockscout.com',
+          apiURL: 'https://megaeth-testnet-v2.blockscout.com/api',
+          browserURL: 'https://megaeth-testnet-v2.blockscout.com',
         },
       },
       {
         network: 'megaeth_testnet',
-        chainId: 6342,
+        chainId: 6343,
         urls: {
-          apiURL: 'https://megaeth-testnet.blockscout.com/api',
-          browserURL: 'https://megaeth-testnet.blockscout.com',
+          apiURL: 'https://megaeth-testnet-v2.blockscout.com/api',
+          browserURL: 'https://megaeth-testnet-v2.blockscout.com',
         },
       },
     ],

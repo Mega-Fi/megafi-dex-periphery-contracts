@@ -1,0 +1,56 @@
+{
+  "swapRouter": "0x032db8D5795Ba9e41ae5DDC1f298E8f3Dd650609",
+  "nonfungiblePositionManager": "0x3dACb94a7A19986BF678842bAaB01E685b61554a",
+  "nonfungibleTokenPositionDescriptor": "0x259389F5B89896D2534eaA7297FCE439C378903F",
+  "nftDescriptorLibrary": "0x03B6017B3298BefE177385b1d49BA22dd9C2A5F6",
+  "quoterV2": "0x7Bd0040Ee02F08507ECEe87c5dC236Aa6f615fF1",
+  "factory": "0x7F72e9C9B8E2B7FaD3C2c2dacDCD28797Bbfa182",
+  "weth9": "0x4200000000000000000000000000000000000006",
+  "deployer": "0x65F5fc632d67d82cbD5Fe5BeE5A3b5024d241eD8",
+  "network": "MegaETH Testnet",
+  "chainId": 6343,
+  "timestamp": "2025-12-01T15:45:55.109Z",
+  "contracts": [
+    {
+      "name": "SwapRouter",
+      "address": "0x032db8D5795Ba9e41ae5DDC1f298E8f3Dd650609",
+      "constructorArgs": [
+        "0x7F72e9C9B8E2B7FaD3C2c2dacDCD28797Bbfa182",
+        "0x4200000000000000000000000000000000000006"
+      ]
+    },
+    {
+      "name": "NFTDescriptor",
+      "address": "0x03B6017B3298BefE177385b1d49BA22dd9C2A5F6",
+      "constructorArgs": []
+    },
+    {
+      "name": "NonfungibleTokenPositionDescriptor",
+      "address": "0x259389F5B89896D2534eaA7297FCE439C378903F",
+      "constructorArgs": [
+        "0x4200000000000000000000000000000000000006",
+        "0x4554480000000000000000000000000000000000000000000000000000000000"
+      ],
+      "libraries": {
+        "NFTDescriptor": "0x03B6017B3298BefE177385b1d49BA22dd9C2A5F6"
+      }
+    },
+    {
+      "name": "NonfungiblePositionManager",
+      "address": "0x3dACb94a7A19986BF678842bAaB01E685b61554a",
+      "constructorArgs": [
+        "0x7F72e9C9B8E2B7FaD3C2c2dacDCD28797Bbfa182",
+        "0x4200000000000000000000000000000000000006",
+        "0x259389F5B89896D2534eaA7297FCE439C378903F"
+      ]
+    },
+    {
+      "name": "QuoterV2",
+      "address": "0x7Bd0040Ee02F08507ECEe87c5dC236Aa6f615fF1",
+      "constructorArgs": [
+        "0x7F72e9C9B8E2B7FaD3C2c2dacDCD28797Bbfa182",
+        "0x4200000000000000000000000000000000000006"
+      ]
+    }
+  ]
+}
