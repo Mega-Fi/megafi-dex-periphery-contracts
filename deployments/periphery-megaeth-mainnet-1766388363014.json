@@ -1,0 +1,19 @@
+{
+  "swapRouter": "0x35F4B32a88ED87E714F70e032566e5B717109B7A",
+  "factory": "0xbd4Ca451E3d28d053E7BE2738623Ed3d91709aa3",
+  "weth9": "0x4200000000000000000000000000000000000006",
+  "deployer": "0x7EB4fa669716271F3b0e71A9d05aB3039Af41e26",
+  "network": "MegaETH Mainnet",
+  "chainId": 4326,
+  "timestamp": "2025-12-22T07:26:03.014Z",
+  "contracts": [
+    {
+      "name": "SwapRouter",
+      "address": "0x35F4B32a88ED87E714F70e032566e5B717109B7A",
+      "constructorArgs": [
+        "0xbd4Ca451E3d28d053E7BE2738623Ed3d91709aa3",
+        "0x4200000000000000000000000000000000000006"
+      ]
+    }
+  ]
+}

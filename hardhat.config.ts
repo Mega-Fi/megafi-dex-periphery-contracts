@@ -91,6 +91,14 @@ export default {
       gasPrice: 2000000,
       gasLimit: 900000000, // 1 gwei
     },
+    megaeth_mainnet: {
+      url: process.env.MEGAETH_MAINNET_RPC_URL || 'https://mainnet.megaeth.com/rpc',
+      chainId: 4326,
+      accounts: PRIVATE_KEY ? [PRIVATE_KEY] : [],
+      gasPrice: 1000000, // 0.001 gwei
+      gas: 150000000, // 150M gas limit
+      allowUnlimitedContractSize: true,
+    },
 
     // megaTestnet: {
     //   url: 'https://carrot.megaeth.com/rpc',
@@ -112,6 +120,7 @@ export default {
     // For Blockscout, any non-empty string works as API key
     apiKey: {
       megaeth_testnet: 'empty',
+      megaeth_mainnet: 'empty',
     },
     customChains: [
       {
@@ -136,6 +145,14 @@ export default {
         urls: {
           apiURL: 'https://megaeth-testnet-v2.blockscout.com/api',
           browserURL: 'https://megaeth-testnet-v2.blockscout.com',
+        },
+      },
+      {
+        network: 'megaeth_mainnet',
+        chainId: 4326,
+        urls: {
+          apiURL: 'https://megaeth.blockscout.com/api',
+          browserURL: 'https://megaeth.blockscout.com',
         },
       },
     ],
