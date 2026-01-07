@@ -104,7 +104,7 @@ library NFTDescriptor {
         return
             string(
                 abi.encodePacked(
-                    'This NFT represents a liquidity position in a Uniswap V3 ',
+                    'This NFT represents a liquidity position in a MegaFi DEX ',
                     quoteTokenSymbol,
                     '-',
                     baseTokenSymbol,
@@ -152,7 +152,7 @@ library NFTDescriptor {
         return
             string(
                 abi.encodePacked(
-                    'Uniswap - ',
+                    'MegaFi DEX - ',
                     feeTier,
                     ' - ',
                     escapeQuotes(params.quoteTokenSymbol),
