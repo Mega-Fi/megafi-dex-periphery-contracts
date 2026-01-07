@@ -1,0 +1,38 @@
+{
+  "nonfungiblePositionManager": "0x608A4c021F434CD5e44297Bf17b7D6aC3ab269A0",
+  "nonfungibleTokenPositionDescriptor": "0xE4c2C390b457D20A74A005fafeE73bB64a6bdb63",
+  "nftDescriptorLibrary": "0x41E887a78E70658d835B400c44FC8593b7275a53",
+  "factory": "0xbd4Ca451E3d28d053E7BE2738623Ed3d91709aa3",
+  "weth9": "0x4200000000000000000000000000000000000006",
+  "deployer": "0x7EB4fa669716271F3b0e71A9d05aB3039Af41e26",
+  "network": "MegaETH Mainnet",
+  "chainId": 4326,
+  "timestamp": "2026-01-07T19:44:03.912Z",
+  "contracts": [
+    {
+      "name": "NFTDescriptor",
+      "address": "0x41E887a78E70658d835B400c44FC8593b7275a53",
+      "constructorArgs": []
+    },
+    {
+      "name": "NonfungibleTokenPositionDescriptor",
+      "address": "0xE4c2C390b457D20A74A005fafeE73bB64a6bdb63",
+      "constructorArgs": [
+        "0x4200000000000000000000000000000000000006",
+        "0x4554480000000000000000000000000000000000000000000000000000000000"
+      ],
+      "libraries": {
+        "NFTDescriptor": "0x41E887a78E70658d835B400c44FC8593b7275a53"
+      }
+    },
+    {
+      "name": "NonfungiblePositionManager",
+      "address": "0x608A4c021F434CD5e44297Bf17b7D6aC3ab269A0",
+      "constructorArgs": [
+        "0xbd4Ca451E3d28d053E7BE2738623Ed3d91709aa3",
+        "0x4200000000000000000000000000000000000006",
+        "0xE4c2C390b457D20A74A005fafeE73bB64a6bdb63"
+      ]
+    }
+  ]
+}

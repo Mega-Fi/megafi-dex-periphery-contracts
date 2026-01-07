@@ -9,3 +9,4 @@ foundry-out/
 .env
 .env.local
 .env.*.local
+scripts/
