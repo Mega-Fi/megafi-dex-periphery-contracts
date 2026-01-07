@@ -115,88 +115,62 @@ async function main() {
   // MegaETH mainnet gas settings
   const gasPrice = ethers.BigNumber.from('1000000') // 0.001 gwei
 
-  // // Step 1: Deploy SwapRouter
-  // console.log('\n' + '='.repeat(70))
-  // console.log('📦 Step 1: Deploying SwapRouter...')
-  // console.log('='.repeat(70))
-
-  // const SwapRouter = await ethers.getContractFactory('SwapRouter')
-  // const swapRouter = await deployWithGasEstimation(
-  //   SwapRouter,
-  //   deployer,
-  //   'SwapRouter',
-  //   [FACTORY_ADDRESS, WETH9_ADDRESS],
-  //   { gasPrice }
-  // )
-
-  // // Step 2: Deploy NFTDescriptor library
-  // console.log('\n' + '='.repeat(70))
-  // console.log('📦 Step 2: Deploying NFTDescriptor Library...')
-  // console.log('='.repeat(70))
-
-  // const NFTDescriptorLibrary = await ethers.getContractFactory('NFTDescriptor')
-  // const nftDescriptorLibrary = await deployWithGasEstimation(
-  //   NFTDescriptorLibrary,
-  //   deployer,
-  //   'NFTDescriptor Library',
-  //   [],
-  //   { gasPrice }
-  // )
-
-  // // Step 3: Deploy NonfungibleTokenPositionDescriptor (with library linking)
-  // console.log('\n' + '='.repeat(70))
-  // console.log('📦 Step 3: Deploying NonfungibleTokenPositionDescriptor...')
-  // console.log('='.repeat(70))
-
-  // // Link the NFTDescriptor library
-  // const NonfungibleTokenPositionDescriptor = await ethers.getContractFactory('NonfungibleTokenPositionDescriptor', {
-  //   libraries: {
-  //     NFTDescriptor: nftDescriptorLibrary.address,
-  //   },
-  // })
-
-  // // Convert "ETH" to bytes32 for nativeCurrencyLabel
-  // const nativeCurrencyLabelBytes = ethers.utils.formatBytes32String('ETH')
-
-  // const nftDescriptor = await deployWithGasEstimation(
-  //   NonfungibleTokenPositionDescriptor,
-  //   deployer,
-  //   'NonfungibleTokenPositionDescriptor',
-  //   [WETH9_ADDRESS, nativeCurrencyLabelBytes],
-  //   { gasPrice }
-  // )
-
-  // // Step 4: Deploy NonfungiblePositionManager
-  // console.log('\n' + '='.repeat(70))
-  // console.log('📦 Step 4: Deploying NonfungiblePositionManager...')
-  // console.log('='.repeat(70))
-
-  // const NonfungiblePositionManager = await ethers.getContractFactory('NonfungiblePositionManager')
-  // const positionManager = await deployWithGasEstimation(
-  //   NonfungiblePositionManager,
-  //   deployer,
-  //   'NonfungiblePositionManager',
-  //   [FACTORY_ADDRESS, WETH9_ADDRESS, nftDescriptor.address],
-  //   { gasPrice }
-  // )
-
-  // Step 5: Deploy QuoterV2
+  // Step 2: Deploy NFTDescriptor library
   console.log('\n' + '='.repeat(70))
-  console.log('📦 Step 5: Deploying QuoterV2...')
+  console.log('📦 Step 2: Deploying NFTDescriptor Library...')
   console.log('='.repeat(70))
 
-  const QuoterV2 = await ethers.getContractFactory('QuoterV2')
-  const quoterV2 = await deployWithGasEstimation(QuoterV2, deployer, 'QuoterV2', [FACTORY_ADDRESS, WETH9_ADDRESS], {
-    gasPrice,
+  const NFTDescriptorLibrary = await ethers.getContractFactory('NFTDescriptor')
+  const nftDescriptorLibrary = await deployWithGasEstimation(
+    NFTDescriptorLibrary,
+    deployer,
+    'NFTDescriptor Library',
+    [],
+    { gasPrice }
+  )
+
+  // Step 3: Deploy NonfungibleTokenPositionDescriptor (with library linking)
+  console.log('\n' + '='.repeat(70))
+  console.log('📦 Step 3: Deploying NonfungibleTokenPositionDescriptor...')
+  console.log('='.repeat(70))
+
+  // Link the NFTDescriptor library
+  const NonfungibleTokenPositionDescriptor = await ethers.getContractFactory('NonfungibleTokenPositionDescriptor', {
+    libraries: {
+      NFTDescriptor: nftDescriptorLibrary.address,
+    },
   })
+
+  // Convert "ETH" to bytes32 for nativeCurrencyLabel
+  const nativeCurrencyLabelBytes = ethers.utils.formatBytes32String('ETH')
+
+  const nftDescriptor = await deployWithGasEstimation(
+    NonfungibleTokenPositionDescriptor,
+    deployer,
+    'NonfungibleTokenPositionDescriptor',
+    [WETH9_ADDRESS, nativeCurrencyLabelBytes],
+    { gasPrice }
+  )
+
+  // Step 4: Deploy NonfungiblePositionManager (WITH CORRECTED POOL_INIT_CODE_HASH!)
+  console.log('\n' + '='.repeat(70))
+  console.log('📦 Step 4: Deploying NonfungiblePositionManager...')
+  console.log('='.repeat(70))
+
+  const NonfungiblePositionManager = await ethers.getContractFactory('NonfungiblePositionManager')
+  const positionManager = await deployWithGasEstimation(
+    NonfungiblePositionManager,
+    deployer,
+    'NonfungiblePositionManager',
+    [FACTORY_ADDRESS, WETH9_ADDRESS, nftDescriptor.address],
+    { gasPrice }
+  )
 
   // Save deployment info
   const deploymentInfo = {
-    // swapRouter: swapRouter.address,
-    // nonfungiblePositionManager: positionManager.address,
-    // nonfungibleTokenPositionDescriptor: nftDescriptor.address,
-    // nftDescriptorLibrary: nftDescriptorLibrary.address,
-    quoterV2: quoterV2.address,
+    nonfungiblePositionManager: positionManager.address,
+    nonfungibleTokenPositionDescriptor: nftDescriptor.address,
+    nftDescriptorLibrary: nftDescriptorLibrary.address,
     factory: FACTORY_ADDRESS,
     weth9: WETH9_ADDRESS,
     deployer: deployer.address,
@@ -204,31 +178,21 @@ async function main() {
     chainId: 4326,
     timestamp: new Date().toISOString(),
     contracts: [
-      // {
-      //   name: 'SwapRouter',
-      //   address: swapRouter.address,
-      //   constructorArgs: [FACTORY_ADDRESS, WETH9_ADDRESS],
-      // },
-      // {
-      //   name: 'NFTDescriptor',
-      //   address: nftDescriptorLibrary.address,
-      //   constructorArgs: [],
-      // },
-      // {
-      //   name: 'NonfungibleTokenPositionDescriptor',
-      //   address: nftDescriptor.address,
-      //   constructorArgs: [WETH9_ADDRESS, nativeCurrencyLabelBytes],
-      //   libraries: { NFTDescriptor: nftDescriptorLibrary.address },
-      // },
-      // {
-      //   name: 'NonfungiblePositionManager',
-      //   address: positionManager.address,
-      //   constructorArgs: [FACTORY_ADDRESS, WETH9_ADDRESS, nftDescriptor.address],
-      // },
       {
-        name: 'QuoterV2',
-        address: quoterV2.address,
-        constructorArgs: [FACTORY_ADDRESS, WETH9_ADDRESS],
+        name: 'NFTDescriptor',
+        address: nftDescriptorLibrary.address,
+        constructorArgs: [],
+      },
+      {
+        name: 'NonfungibleTokenPositionDescriptor',
+        address: nftDescriptor.address,
+        constructorArgs: [WETH9_ADDRESS, nativeCurrencyLabelBytes],
+        libraries: { NFTDescriptor: nftDescriptorLibrary.address },
+      },
+      {
+        name: 'NonfungiblePositionManager',
+        address: positionManager.address,
+        constructorArgs: [FACTORY_ADDRESS, WETH9_ADDRESS, nftDescriptor.address],
       },
     ],
   }
@@ -266,11 +230,9 @@ async function main() {
   console.log('Network:                    MegaETH Mainnet (Chain ID: 4326)')
   console.log('Deployer:                  ', deployer.address)
   console.log('─'.repeat(70))
-  // console.log('SwapRouter:                ', swapRouter.address)
-  // console.log('PositionManager:           ', positionManager.address)
-  // console.log('PositionDescriptor:        ', nftDescriptor.address)
-  // console.log('NFTDescriptor Library:     ', nftDescriptorLibrary.address)
-  console.log('QuoterV2:                  ', quoterV2.address)
+  console.log('PositionManager:           ', positionManager.address)
+  console.log('PositionDescriptor:        ', nftDescriptor.address)
+  console.log('NFTDescriptor Library:     ', nftDescriptorLibrary.address)
   console.log('─'.repeat(70))
   console.log('Factory (from core):       ', FACTORY_ADDRESS)
   console.log('WETH9:                     ', WETH9_ADDRESS)
@@ -295,10 +257,9 @@ async function main() {
   console.log(`   })`)
 
   console.log('\n🔗 View on Explorer:')
-  // console.log(`   SwapRouter: https://megaeth.blockscout.com/address/${swapRouter.address}`)
-  // console.log(`   PositionManager: https://megaeth.blockscout.com/address/${positionManager.address}`)
-  // console.log(`   Descriptor: https://megaeth.blockscout.com/address/${nftDescriptor.address}`)
-  console.log(`   QuoterV2: https://megaeth.blockscout.com/address/${quoterV2.address}`)
+  console.log(`   PositionManager: https://megaeth.blockscout.com/address/${positionManager.address}`)
+  console.log(`   Descriptor: https://megaeth.blockscout.com/address/${nftDescriptor.address}`)
+  console.log(`   NFTDescriptor: https://megaeth.blockscout.com/address/${nftDescriptorLibrary.address}`)
 
   console.log('\n' + '='.repeat(70))
 }
